@@ -19,9 +19,9 @@ connection.connect((err) => {
     }
     console.log('Conexão ao banco de dados estabelecida com sucesso');
 });
-
+ 
 // Rota para exibir a lista de nomes
-app.get('/', (req, res) => {
+app.get('/', (req, res) =>  {
     const sql = `INSERT INTO people (name) values ("EMILY")`;
     connection.query(sql, (err, result) => {
         if (err) {
