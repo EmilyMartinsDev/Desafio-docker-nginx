@@ -3,18 +3,19 @@ services:
   app:
     command: npm start
     build:
+      dockerfile: Dockerfile
       context: node
     networks:
       - nodenet
     depends_on:
       - mysql
-    entrypoint: dockerize -wait tcp://mysql:3306 timeout 20s docker-entrypoint.sh  
+    entrypoint: dockerize -wait tcp://mysql:3306 timeout 20s docker-entrypoint.sh
     container_name: app
     ports:
       - "3000:3000"
     tty: true
     volumes:
-      - /home/emily/desafio-node/node:/usr/app
+      - ./node:/usr/app
 
   mysql:
     restart: always
@@ -23,7 +24,7 @@ services:
     container_name: mysql
     tty: true
     volumes:
-      - /home/emily/desafio-node/mysql:/var/lib/mysql
+      - ./mysql:/var/lib/mysql
     environment:
       - MYSQL_DATABASE=nodedb
       - MYSQL_ROOT_PASSWORD=root
